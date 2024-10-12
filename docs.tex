@@ -1,0 +1,207 @@
+\documentclass[swedish]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+\usepackage{mathtoolsplus}
+\usepackage{listings}  % For displaying LaTeX code
+
+\title{MathtoolsPlus Package Documentation}
+\author{Eduards Abisevs}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+This document provides an overview of the custom \texttt{mathtoolsplus} LaTeX package, designed to assist with creating math and physics documents. The package includes:
+\begin{itemize}
+    \item Custom theorem and example environments
+    \item Boxed environments for problems and solutions
+    \item Diagrams with \texttt{TikZ}
+    \item Custom chapter and section formatting
+\end{itemize}
+
+\section{Theorem Environments}
+
+\subsection{Output}
+
+\begin{theorem}
+Låt \( a \) och \( b \) vara reella tal. Om \( a = b \), så är \( a^2 = b^2 \).
+\end{theorem}
+
+\begin{lemma}
+För alla reella tal \( x \) och \( y \), 
+så gäller \( (x + y)^2 = x^2 + 2xy + y^2 \).
+\end{lemma}
+
+\begin{definition}
+En \textit{funktion} är en relation mellan en mängd av indata och en mängd av möjliga utdata, där varje indata relateras till exakt ett utdata.
+\end{definition}
+
+\subsection{Code}
+
+\begin{lstlisting}[language=TeX]
+\begin{theorem}
+Låt \( a \) och \( b \) vara reella tal.
+Om \( a = b \), så är \( a^2 = b^2 \).
+\end{theorem}
+
+\begin{lemma}
+För alla reella tal \( x \) och \( y \),
+så gäller \( (x + y)^2 = x^2 + 2xy + y^2 \).
+\end{lemma}
+
+\begin{definition}
+En \textit{funktion} är en relation mellan en mängd av indata och en mängd av möjliga utdata, där varje indata relateras till exakt ett utdata.
+\end{definition}
+\end{lstlisting}
+
+\section{Example Environment}
+
+\subsection{Output}
+
+\begin{example}
+Detta är ett grundläggande exempel utan ytterligare text.
+\end{example}
+
+\begin{example}[Lösa en ekvation]
+Lös \( x^2 = 4 \). Lösningarna är \( x = 2 \) och \( x = -2 \).
+\end{example}
+
+\subsection{Code}
+
+\begin{lstlisting}[language=TeX]
+\begin{example}
+Detta är ett grundläggande exempel utan ytterligare text.
+\end{example}
+
+\begin{example}[Lösa en ekvation]
+Lös \( x^2 = 4 \). Lösningarna är \( x = 2 \) och \( x = -2 \).
+\end{example}
+\end{lstlisting}
+
+\section{Boxed Environments for Problem Solving}
+
+\subsection{Output}
+
+\begin{given}
+Vi har en massa \( m = 5 \, \mathrm{kg} \).
+\end{given}
+
+\begin{sought}
+Vi söker kraften \( F \) givet att \( a = 2 \, \mathrm{m/s^2} \).
+\end{sought}
+
+\begin{solution}
+Med hjälp av Newtons andra lag: \( F = ma = 5 \times 2 = 10 \, \mathrm{N} \).
+\end{solution}
+
+\begin{answer}
+Kraften är \( F = 10 \, \mathrm{N} \).
+\end{answer}
+
+\subsection{Code}
+
+\begin{lstlisting}[language=TeX]
+\begin{given}
+Vi har en massa \( m = 5 \, \mathrm{kg} \).
+\end{given}
+
+\begin{sought}
+Vi söker kraften \( F \) givet att \( a = 2 \, \mathrm{m/s^2} \).
+\end{sought}
+
+\begin{solution}
+Med hjälp av Newtons andra lag: \( F = ma = 5 \times 2 = 10 \, \mathrm{N} \).
+\end{solution}
+
+\begin{answer}
+Kraften är \( F = 10 \, \mathrm{N} \).
+\end{answer}
+\end{lstlisting}
+
+\section{Diagrams with TikZ}
+
+\subsection{Output: Horizontal Layout}
+
+\begin{given_diagram}[h]{
+  \begin{tikzpicture}
+    \draw[->] (0,0) -- (2,0) node[below] {$x$};
+    \draw[->] (0,0) -- (0,2) node[left] {$y$};
+    \draw (0,0) -- (1.5,1.5);
+  \end{tikzpicture}
+}{Detta är ett enkelt koordinatsystemdiagram.}
+\end{given_diagram}
+
+\subsection{Output: Vertical Layout}
+
+\begin{given_diagram}[v]{
+  \begin{tikzpicture}
+    \draw (0,0) circle (1);
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+  \end{tikzpicture}
+}{Detta är en diagram som visar enhetscirkeln.}
+\end{given_diagram}
+
+\subsection{Code}
+
+\begin{lstlisting}[language=TeX]
+\begin{given_diagram}[h]{
+  \begin{tikzpicture}
+    \draw[->] (0,0) -- (2,0) node[below] {$x$};
+    \draw[->] (0,0) -- (0,2) node[left] {$y$};
+    \draw (0,0) -- (1.5,1.5);
+  \end{tikzpicture}
+}{Detta är ett enkelt koordinatsystemdiagram.}
+\end{given_diagram}
+
+\begin{given_diagram}[v]{
+  \begin{tikzpicture}
+    \draw (0,0) circle (1);
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+  \end{tikzpicture}
+}{Detta är en diagram som visar enhetscirkeln.}
+\end{given_diagram}
+\end{lstlisting}
+
+\section{Switching to English}
+
+\subsection{Output in English}
+
+\selectlanguage{english}
+
+\begin{theorem}
+Let \( a \) and \( b \) be real numbers. If \( a = b \), then \( a^2 = b^2 \).
+\end{theorem}
+
+\begin{lemma}
+For any real numbers \( x \) and \( y \), \( (x + y)^2 = x^2 + 2xy + y^2 \).
+\end{lemma}
+
+\begin{definition}
+A \textit{function} is a relation between a set of inputs and a set of possible outputs, where each input is related to exactly one output.
+\end{definition}
+
+\subsection{Code in English}
+
+\begin{lstlisting}[language=TeX]
+\selectlanguage{english}
+
+\begin{theorem}
+Let \( a \) and \( b \) be real numbers. If \( a = b \), then \( a^2 = b^2 \).
+\end{theorem}
+
+\begin{lemma}
+For any real numbers \( x \) and \( y \), \( (x + y)^2 = x^2 + 2xy + y^2 \).
+\end{lemma}
+
+\begin{definition}
+A \textit{function} is a relation between a set of inputs and a set of possible outputs, where each input is related to exactly one output.
+\end{definition}
+\end{lstlisting}
+
+\end{document}
+§

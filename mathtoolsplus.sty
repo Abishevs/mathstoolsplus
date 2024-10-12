@@ -1,0 +1,90 @@
+\ProvidesPackage{mathtoolsplus}[2024/10/12 Custom package for math and physics with language support]
+
+% Load necessary packages
+\RequirePackage{tikz}
+\usetikzlibrary{angles,quotes}
+\RequirePackage{titlesec}
+\RequirePackage{subfiles}
+\RequirePackage{amsthm}
+\RequirePackage{tcolorbox}
+\RequirePackage{hyperref}
+\RequirePackage{ifthen} % For conditional logic
+\RequirePackage{babel}  % Language package
+
+% Define language-based titles for environments
+\newcommand{\gettitle}[2]{%
+  \iflanguage{swedish}{#1}{#2}%
+}
+
+% Custom Chapter Formatting
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\centering}
+  {\thechapter}
+  {20pt}
+  {\Huge}
+\titlespacing*{\chapter}{0pt}{50pt}{40pt}
+
+% Define theorem styles
+\theoremstyle{plain}
+\newtheorem{theorem}{\gettitle{Sats}{Theorem}}[section]
+\newtheorem{lemma}[theorem]{\gettitle{Lemma}{Lemma}}
+\newtheorem{corollary}[theorem]{\gettitle{Korollarium}{Corollary}}
+\renewcommand\qedsymbol{QED}
+
+\theoremstyle{definition}
+\newtheorem{definition}{\gettitle{Definition}{Definition}}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{\gettitle{Anmärkning}{Remark}}
+
+% Define a new counter for examples
+\newcounter{example}[section] % Reset counter at each new section
+\renewcommand{\theexample}{\thesection.\arabic{example}} % Format: section.number
+
+% Define the example environment
+\newenvironment{example}[1][]
+  {\refstepcounter{example}%
+   \vspace{0.5em}
+   \noindent\textbf{\gettitle{Exempel}{Example} \theexample\ #1}\par\nobreak
+   \noindent\ignorespaces
+  }
+  {\bigskip}
+
+% Custom tcolorbox environments with dynamic titles
+\tcbset{
+    % enhanced jigsaw, % Better frame drawing
+    % breakable, % Allow breaking across pages
+    colback=white, % Background color
+    colframe=gray!20, % Frame color
+    boxrule=0.5pt, % Frame thickness
+    arc=2mm, % Rounded corners
+    top=2mm, bottom=2mm, left=2mm, right=2mm, % Padding inside the box
+    before skip=6pt, after skip=6pt % Space outside the box
+}
+
+% Define problem and solution environments with dynamic language titles
+\newtcolorbox{given}{coltitle=black, title=\gettitle{Givet}{Given}:}
+\newtcolorbox{sought}{coltitle=black, title=\gettitle{Sökt}{Sought}:}
+\newtcolorbox{solution}{coltitle=black, title=\gettitle{Lösning}{Solution}:}
+\newtcolorbox{answer}{coltitle=black, title=\gettitle{Svar}{Answer}:}
+
+% Supports horizontal and vertical layouts for given diagrams
+% Removed use of xargs, and added simple ifthen logic for layout control
+\newenvironment{given_diagram}[2][h]{
+  \begin{given}
+  \noindent
+  \ifthenelse{\equal{#1}{h}}{ % If horizontal layout
+    \begin{minipage}[t]{0.3\linewidth}
+      \centering
+      \raisebox{-\height}{#2} % TikZ code
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.65\linewidth}
+  }{ % Else, use vertical layout
+    \begin{center}
+      #2 % TikZ code
+    \end{center}
+    \begin{minipage}[t]{\linewidth}
+  }
+}{\end{minipage}\end{given}}
+
